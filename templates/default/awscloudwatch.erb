@@ -8,7 +8,7 @@
         "Id": "<%= section_name %>",
         "Parameters": {
           <%= section_config.map { |key, val|
-          %Q["#{key}": "#{val}"] }.join(',') \n %>
+          %Q["#{key}": "#{val}"] }.join(",\n") %>
         }
       }
     ]<% end %>
