@@ -5,3 +5,7 @@ default['cwlogs']['attempt_upgrade'] = true
 default['cwlogs']['python_bin'] = ''
 default['cwlogs']['ca_bundle'] = ''
 default['cwlogs']['installation_file_source'] = 'https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py'
+
+# -- Installs python3.x
+default['poise-python']['install_python2'] = false
+default['poise-python']['install_python3'] = true
