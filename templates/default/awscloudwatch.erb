@@ -1,0 +1,16 @@
+{
+  "isEnabled" : true,
+  "EngineConfiguration": {
+    "PollInterval": "00:00:15",
+    "Components": [
+      <% @logfiles.each do |section_name, section_config| %>
+      {
+        "Id": "<%= section_name %>",
+        "Parameters": {
+          <%= section_config.map { |key, val|
+          %Q["#{key}": "#{val}"] }.join(',') \n %>
+        }
+      }
+    ]<% end %>
+  }
+}
