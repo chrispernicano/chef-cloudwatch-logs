@@ -5,9 +5,16 @@ logs via attributes.
 
 ## Supported OS
 
-Currently all linux OS's are supported.
+Currently all linux OS's and Windows 2012/2016 are supported.
 
 On Amazon Linux the yum package will be used.
+
+## Permissions
+
+Please create a **Role** in your IAM profile giving the following policies to your role:
+>** CloudWatchEventsInvocationAccess**
+**AmazonEC2RoleforSSM**
+* SSM is for Windows instances
 
 ## Usage
 
@@ -27,6 +34,7 @@ The CloudWatch agent no longer supports installs using Python 2.6. On systems wi
  ```ruby
  default['cwlogs']['python_bin'] = '/usr/bin/python2.7'
  ```
+** Windows uses Python 3.4 at the moment of this document**
 
  Some systems require a root SSL certificate in order for python/pip to access remote https endpoints. For that purpose, you can specify a location to your system's root cert bundle using the `default['cwlogs']['ca_bundle']` attribute.
 
@@ -42,7 +50,7 @@ The CloudWatch agent no longer supports installs using Python 2.6. On systems wi
  ```
 
 
-## Example
+# Examples
 
 ```ruby
 default['cwlogs']['logfiles']['mysite-httpd_access'] = {
@@ -70,6 +78,40 @@ default['cwlogs']['logfiles']['mysite-mod_security_log'] = {
   :initial_position         => 'end_of_file'
 }
 ```
+
+### Windows
+
+```ruby
+default['cwlogs']['logfiles']['mysite-httpd-access'] = {
+  :fullname  => 'full description',
+  :log_stream_name   => 'mysite-httpd_access-group',
+  :log_group_name    => '/var/log/httpd/mysite.com/access_log',
+  :datetime_format  => '%d/%b/%Y:%H:%M:%S %z',
+  :file => 'C:\Program Files\logs'
+}
+```
+In **JSON**:
+```json
+{
+  "cwlogs": {
+    "logfiles": {
+      "mysite-httpd-access": {
+	    "fullname": "full description",
+	    "log_stream_name": "mysite https access group",
+	    "log_group_name": "default",
+	    "file": "C:\\Program Files\logs"
+	  }
+    }
+  }
+}
+```
+*To know more about Cloudwatch JSON for windows please refer to this documentation*: **[AWS Cloudwatch JSON](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html "AWS Cloudwatch JSON")**
+*And as a better example*: **https://gist.github.com/babakc/cffce532d36a220bf6bf90b3c4feb563**
+
+This file will be stored as: **C:\Program Files\Amazon\SSM\Plugins\awsCloudWatch\AWS.EC2.Windows.CloudWatch.json**
+
+
+### Linux
 
 From any attributes file will generate the following CloudWatch Logs config:
 
