@@ -36,7 +36,8 @@ end
 template "#{ssm_path}\\AWS.EC2.Windows.CloudWatch.json" do
   source 'awscloudwatch.erb'
   variables ({
-    :logfiles => node['cwlogs']['logfiles']
+    logfiles: node['cwlogs']['logfiles'],
+    flows:  node['cwlogs']['flows']
   })
 end
 

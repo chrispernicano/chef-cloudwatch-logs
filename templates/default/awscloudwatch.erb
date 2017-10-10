@@ -15,5 +15,10 @@
       }<%= ","  unless @logfiles.size == counter %>
       <% end %>
     ]
+    "Flows": {
+      "Flows": [<% @flows.each do |flow| %>
+               "<%= flow %>"<%= "," unless flow == @flows.last %>
+                <% end %>]
+    }
   }
 }
