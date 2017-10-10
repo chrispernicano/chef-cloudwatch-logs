@@ -16,6 +16,17 @@ Please create a **Role** in your IAM profile giving the following policies to yo
 >**AmazonEC2RoleforSSM**
 * SSM is for Windows instances
 
+If you want a not very intrusive Role for your SSM allowances, you can create a new policy with the following so you would have just the necessary to run it:
+```json
+"Action": [
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListCommands",
+                "ssm:SendCommand",
+                "ssm:ListCommandInvocations",
+                "ssm:GetDocument"
+            ]
+```
+
 ## Usage
 
 Logs are configured by appending to the `['cwlogs']['logfiles']` attribute from
