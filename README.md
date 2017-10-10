@@ -13,7 +13,7 @@ On Amazon Linux the yum package will be used.
 
 Please create a **Role** in your IAM profile giving the following policies to your role:
 >** CloudWatchEventsInvocationAccess**
-**AmazonEC2RoleforSSM**
+>**AmazonEC2RoleforSSM**
 * SSM is for Windows instances
 
 ## Usage
@@ -99,7 +99,7 @@ In **JSON**:
 	    "fullname": "full description",
 	    "log_stream_name": "mysite https access group",
 	    "log_group_name": "default",
-	    "file": "C:\\Program Files\logs"
+	    "file": "C:\\Program Files\\logs"
 	  }
     }
   }
