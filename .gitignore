@@ -5,6 +5,9 @@
 .AppleDouble
 .LSOverride
 
+# pem files
+*.pem
+
 # Icon must end with two \r
 Icon
 

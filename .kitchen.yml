@@ -1,0 +1,33 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: generalKey
+  security_group_ids: [ 'TestKitchen' ]
+  region: us-west-2
+
+platforms:
+  - name: amazon-2017.03
+    driver:
+      image_id: ami-aa5ebdd2
+      tags:
+        Name: TestKitchen:chef-base:amazon-2013.09
+  - name: redhat-7.4
+    driver:
+      image_id: ami-9fa343e7
+      tags:
+        Name: TestKitchen:chef-base:redhat-7.4
+  - name: suse-12.2
+    driver:
+      image_id: ami-da786da3
+      tags:
+        Name: TestKitchen:chef-base:suse-12.2
+  - name: ubuntu-16.04
+    driver:
+      image_id: ami-6e1a0117
+      tags:
+        Name: TestKitchen:chef-base:ubuntu-16.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[chef-automox::default]

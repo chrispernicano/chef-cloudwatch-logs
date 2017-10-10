@@ -8,8 +8,11 @@ if node['cwlogs']['logfiles'].nil?
   return
 end
 
-if node['platform'] == 'amazon' && Gem::Version.new(node['platform_version']) >= Gem::Version.new('2014.09')
-  include_recipe 'cloudwatch-logs::package'
-else
-  include_recipe 'cloudwatch-logs::installer'
+case node['platform']
+when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora'
+  include_recipe 'cloudwatch-logs::linux'
+when 'amazon' && Gem::Version.new(node['platform_version']) >= Gem::Version.new('2014.09')
+  include_recipe 'cloudwatch-logs::amazon'
+when 'windows'
+  include_recipe 'cloudwatch-logs::windows'
 end
